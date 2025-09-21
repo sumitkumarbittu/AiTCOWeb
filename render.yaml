@@ -4,13 +4,17 @@ services:
     env: python
     pythonVersion: "3.10.0"
     buildCommand: |
-      python -m pip install --upgrade pip
-      pip install setuptools wheel
-      pip install -r requirements.txt
-    startCommand: python3 app.py
+      python -m pip install --upgrade pip setuptools wheel
+      pip install --no-cache-dir -U pip setuptools wheel
+      pip install --no-cache-dir -r requirements.txt
+    startCommand: gunicorn --bind :$PORT --workers 1 --threads 4 --timeout 120 app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
       - key: PORT
         value: 10000
+      - key: PYTHONUNBUFFERED
+        value: true
+      - key: PYTHONDONTWRITEBYTECODE
+        value: 1
     plan: free
