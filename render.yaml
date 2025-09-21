@@ -4,17 +4,20 @@ services:
     env: python
     pythonVersion: "3.10.0"
     buildCommand: |
-      python -m pip install --upgrade pip setuptools wheel
-      pip install --no-cache-dir -U pip setuptools wheel
-      pip install --no-cache-dir -r requirements.txt
+      python --version
+      python -m pip install --upgrade pip==23.0.1
+      python -m pip install --upgrade setuptools==65.5.0 wheel==0.40.0
+      python -m pip install --no-cache-dir -r requirements.txt
     startCommand: gunicorn --bind :$PORT --workers 1 --threads 4 --timeout 120 app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
-      - key: PORT
-        value: 10000
-      - key: PYTHONUNBUFFERED
-        value: true
+      - key: PYTHONPYCACHEPREFIX
+        value: /tmp/pycache
       - key: PYTHONDONTWRITEBYTECODE
         value: 1
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: PORT
+        value: 10000
     plan: free
