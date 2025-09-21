@@ -1,9 +1,10 @@
+# Build tools
 setuptools>=65.5.1
 wheel>=0.40.0
 
-# Main dependencies
+# Main dependencies with version constraints for Python 3.10
 flask==2.3.3
-pandas==2.0.3
+pandas==1.5.3  # Using an older version for better compatibility
 networkx==3.1
 google-generativeai==0.3.2
 python-dotenv==1.0.0
@@ -12,8 +13,8 @@ python-dateutil==2.8.2
 pytz==2023.3
 tzdata==2023.3
 
-gunicorn==21.2.0
-plotly==5.18.0
+gunicorn==20.1.0  # Using an older, more stable version
+plotly==5.15.0  # Slightly older version for better compatibility
 
 # Flask dependencies
 Werkzeug==2.3.7

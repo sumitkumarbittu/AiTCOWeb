@@ -2,8 +2,12 @@ services:
   - type: web
     name: aitco-web
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    pythonVersion: "3.10.0"
+    buildCommand: |
+      python -m pip install --upgrade pip
+      pip install setuptools wheel
+      pip install -r requirements.txt
+    startCommand: python3 app.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
